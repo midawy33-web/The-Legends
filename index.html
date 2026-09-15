@@ -185,6 +185,9 @@ footer img{width:64px;height:64px;border-radius:50%;border:2px solid var(--gold)
 footer p{color:var(--muted);font-size:.85rem}
 footer .gold-text{color:var(--gold2);font-weight:800}
 
+/* toast */
+#toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);background:linear-gradient(135deg,var(--gold),var(--gold3));color:var(--navy);padding:12px 26px;border-radius:99px;font-weight:800;z-index:3000;transition:.4s;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#toast.show{transform:translate(-50%,0)}
 
 @media(max-width:860px){
   .flow-wrap{grid-template-columns:1fr}
@@ -286,6 +289,7 @@ footer .gold-text{color:var(--gold2);font-weight:800}
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#updates" data-i18n="nav_updates">التحديثات</a></li>
+    <li><a href="#updates" data-i18n="nav_updates">التحديثات</a></li>
     <li><a href="#modules" data-i18n="nav_modules">قاعدة المعرفة</a></li>
   </ul>
   <div style="display:flex;gap:10px;align-items:center">
@@ -308,8 +312,8 @@ footer .gold-text{color:var(--gold2);font-weight:800}
 
 <section id="stats" class="reveal">
   <div class="stats">
-    <div class="stat"><div class="num" data-count="12">0</div><div class="lbl" data-i18n="st1">مقال تشغيلي</div></div>
-    <div class="stat"><div class="num" data-count="4">0</div><div class="lbl" data-i18n="st2">أدلة عملية</div></div>
+    <div class="stat"><div class="num" data-count="11">0</div><div class="lbl" data-i18n="st1">مقال تشغيلي</div></div>
+    <div class="stat"><div class="num" data-count="5">0</div><div class="lbl" data-i18n="st2">أدلة عملية</div></div>
     <div class="stat"><div class="num" data-count="16">0</div><div class="lbl" data-i18n="st3">موضوعًا قابلًا للبحث</div></div>
   </div>
 </section>
@@ -391,13 +395,13 @@ updates:[
   s_ar:'حدد الحالة من قاعدة المعرفة أولًا، ثم طبّق الإجراء حسب مصدر الحجز ونوع شركة الطيران وفرق الوقت.',
   s_en:'Identify the case in the Knowledge Base first, then act based on booking source, airline type, and time difference.',
   b_ar:'<h4>GDS — One Way</h4><ul><li>فرق 30 دقيقة أو أقل: نفّذ EWR بنفسك، ولا ترفع تعديل، وسجّل Documentation Case بحالة <b>Done Action</b>.</li><li>غير قابل للتنفيذ أو الفرق أكبر من 30 دقيقة: ارفع <b>Request Action</b> للفريق التجاري، ولا تحوّل إلى Flights Transfer FCR.</li></ul><h4>LCC — Flynas / Flyadeal</h4><ul><li>لو Change متاح على البورتال: نفّذه بنفسك.</li><li>لو Change غير متاح والعميل يريد التعديل: ارفع Request Action للفريق التجاري، ولا تحوّل الشات لـ FCR، واكتب التواريخ الجديدة وكل التفاصيل.</li></ul>',
-  b_en:'<h4>GDS — One Way</h4><ul><li>30 minutes or less: perform EWR yourself, do not raise a change, and log a Documentation Case as <b>Done Action</b>.</li><li>If not executable or the difference is over 30 minutes: raise an <b>Request Action</b> to Commercial; do not transfer to Flights Transfer FCR.</li></ul><h4>LCC — Flynas / Flyadeal</h4><ul><li>If Change is available on the portal: perform it normally.</li><li>If Change is unavailable and the customer wants to modify: raise a Request Action to Commercial, do not transfer to FCR, and include the new dates and required details.</li></ul>'},
+  b_en:'<h4>GDS — One Way</h4><ul><li>30 minutes or less: perform EWR yourself, do not raise a change, and log a Documentation Case as <b>Done Action</b>.</li><li>If not executable or the difference is over 30 minutes: raise an <b>Request Action</b> to Commercial; do not transfer to Flights Transfer FCR.</li></ul><h4>LCC — Flynas / Flyadeal</h4><ul><li>If Change is available on the portal: perform it normally.</li><li>If Change is unavailable and the customer wants to modify: raise an Request Action to Commercial, do not transfer to FCR, and include the new dates and required details.</li></ul>'},
  {cat:'roundtrip',badge_ar:'Round Trip',badge_en:'ROUND TRIP',date:'سارية الآن',icon:'🔁',
   t_ar:'حجوزات الذهاب والعودة — أهلية الإلغاء والتعديل',t_en:'Round Trip Bookings — Cancellation & Change Eligibility',
   s_ar:'التعامل يختلف حسب كون الرحلتين على نفس الـPNR أو على أرقام حجز منفصلة.',
   s_en:'Handling depends on whether both legs share the same PNR or have separate PNRs.',
   b_ar:'<ul><li><b>نفس PNR:</b> إذا تأثرت رحلة واحدة بـ Schedule Change، تحقق من قاعدة المعرفة أولًا قبل الإلغاء أو الاسترجاع الكامل.</li><li><b>PNR مختلف لكل اتجاه:</b> ارفع Request Action للفريق التجاري. لا تحوّل إلى Flights Transfer FCR، ولا تعمل Refund بنفسك، ولا تعد العميل بنتيجة.</li><li>إذا أراد العميل تعديل الاتجاهين وكان لكل اتجاه PNR منفصل، ارفع Commercial Case ولا تأخذ Action على أي حجز.</li><li>إذا كان نفس الـPNR ونفس الـGDS وتأثر Leg واحد والعميل يريد تعديل الذهاب والعودة، ارفع Commercial Case.</li><li>إذا كان GDS وفرق الموعد 30 دقيقة أو أقل، طبّق القواعد العادية.</li></ul>',
-  b_en:'<ul><li><b>Same PNR:</b> if one leg is affected by a schedule change, check the Knowledge Base before full cancellation/refund.</li><li><b>Separate PNRs:</b> raise a Request Action to Commercial. Do not transfer to Flights Transfer FCR, do not refund yourself, and do not promise an outcome.</li><li>If the customer wants to modify both directions with separate PNRs, raise a Commercial Case and take no action on either booking.</li><li>If the same PNR/GDS has one affected leg and the customer wants to modify both directions, raise a Commercial Case.</li><li>For GDS bookings with a 30-minute-or-less difference, apply the normal rules.</li></ul>'},
+  b_en:'<ul><li><b>Same PNR:</b> if one leg is affected by a schedule change, check the Knowledge Base before full cancellation/refund.</li><li><b>Separate PNRs:</b> raise an Request Action to Commercial. Do not transfer to Flights Transfer FCR, do not refund yourself, and do not promise an outcome.</li><li>If the customer wants to modify both directions with separate PNRs, raise a Commercial Case and take no action on either booking.</li><li>If the same PNR/GDS has one affected leg and the customer wants to modify both directions, raise a Commercial Case.</li><li>For GDS bookings with a 30-minute-or-less difference, apply the normal rules.</li></ul>'},
  {cat:'commercial',badge_ar:'Commercial',badge_en:'COMMERCIAL',date:'سارية الآن',icon:'⏱️',
   t_ar:'قاعدة الـ 48 ساعة لطلبات الفريق التجاري',t_en:'48-Hour Rule for Commercial Requests',
   s_ar:'الأصل أن أي طلب للفريق التجاري يكون باقي على السفر فيه أكثر من 48 ساعة، مع استثناءات محددة.',
@@ -421,19 +425,19 @@ updates:[
   s_ar:'طلبات تحديث الإيميل أو رقم الهاتف لحجوزات Fare PK أو Atlas يتم توجيهها لشركة الطيران مباشرة.',
   s_en:'For email or phone updates on Fare PK or Atlas bookings, direct the customer to the airline.',
   b_ar:'<div class="guide-alert">📍 <b>لا ترفع Request Action ولا تحوّل الشات لـ Flights Transfer FCR.</b></div><p>حوّل العميل مباشرة لشركة الطيران لإتمام عملية تحديث البريد أو رقم الهاتف.</p>',
-  b_en:'<div class="guide-alert">📍 <b>Do not raise a Request Action or transfer the chat to Flights Transfer FCR.</b></div><p>Direct the customer to the airline to complete the email or phone update.</p>'},
+  b_en:'<div class="guide-alert">📍 <b>Do not raise an Request Action or transfer the chat to Flights Transfer FCR.</b></div><p>Direct the customer to the airline to complete the email or phone update.</p>'},
  {cat:'special',badge_ar:'حالات خاصة',badge_en:'SPECIAL CASES',date:'سارية الآن',icon:'📝',
   t_ar:'تصحيح الاسم / الوفاة / الحالات الطبية',t_en:'Name Correction / Death / Medical Cases',
   s_ar:'التعامل يختلف حسب عدد حروف تصحيح الاسم وحسب كون الطلب جديدًا أو متابعة لحالة مفتوحة.',
   s_en:'Handling depends on the number of changed characters and whether the request is new or a follow-up to an existing case.',
   b_ar:'<h4>طلب جديد</h4><ul><li>تصحيح اسم 3 حروف أو أقل → ارفع Request Action للفريق التجاري، ولا تحوّل لـ FCR.</li><li>حالات الوفاة والحالات الطبية → ارفع Request Action للفريق التجاري، ولا تحوّل لـ FCR.</li><li>تصحيح اسم أكثر من 3 حروف — كل شركات الطيران → غير مسموح؛ أبلغ العميل، ولا ترفع Request Action، وسجل Documentation Case بحالة <b>Resolved</b>.</li></ul><h4>متابعة حالة مفتوحة</h4><ul><li>لا تحوّل لـ FCR.</li><li>أضف Feed Case على نفس الحالة المفتوحة.</li><li>لا تفتح Request Action جديدة لنفس الموضوع إذا كانت هناك حالة مفتوحة.</li></ul>',
-  b_en:'<h4>New Request</h4><ul><li>Name correction of 3 characters or less → raise a Request Action to Commercial; do not transfer to FCR.</li><li>Death and medical cases → raise a Request Action to Commercial; do not transfer to FCR.</li><li>Name correction of more than 3 characters — all airlines → not allowed; inform the customer, do not raise Request Action, and log a Documentation Case as <b>Resolved</b>.</li></ul><h4>Existing Open Case</h4><ul><li>Do not transfer to FCR.</li><li>Add a Feed Case to the same open case.</li><li>Do not open a new Request Action for the same topic.</li></ul>'},
+  b_en:'<h4>New Request</h4><ul><li>Name correction of 3 characters or less → raise an Request Action to Commercial; do not transfer to FCR.</li><li>Death and medical cases → raise an Request Action to Commercial; do not transfer to FCR.</li><li>Name correction of more than 3 characters — all airlines → not allowed; inform the customer, do not raise Request Action, and log a Documentation Case as <b>Resolved</b>.</li></ul><h4>Existing Open Case</h4><ul><li>Do not transfer to FCR.</li><li>Add a Feed Case to the same open case.</li><li>Do not open a new Request Action for the same topic.</li></ul>'},
  {cat:'portal',badge_ar:'Portal',badge_en:'PORTAL',date:'سارية الآن',icon:'🖥️',
   t_ar:'إلغاء تغيير الموعد لحجوزات Portal',t_en:'Schedule Change Cancellation — Portal Bookings',
   s_ar:'الإجراء يعتمد على فرق الموعد: 6 ساعات أو أكثر، من 4 إلى أقل من 6، أو أقل من 4 ساعات.',
   s_en:'The action depends on the time difference: 6+ hours, 4 to under 6 hours, or under 4 hours.',
   b_ar:'<h4>6 ساعات أو أكثر</h4><ul><li>اعمل الاسترجاع بنفسك.</li><li>خصم 30 ريال لكل راكب.</li><li>لا تلغِ الحجز من بوابة الطيران مباشرة.</li><li>سجل Documentation Case بحالة <b>Action Done</b> واختر Yes لتفعيل Commercial Child Case.</li></ul><h4>من 4 إلى أقل من 6 ساعات</h4><ul><li>ارفع Request Action للفريق التجاري.</li><li>لا تحوّل لـ FCR ولا ترجع فلوس من عندك ولا توعد العميل بنتيجة.</li></ul><h4>أقل من 4 ساعات</h4><p>طبّق قواعد التسعيرة العادية.</p><h4>تذكير حساب الاسترجاع</h4><ul><li>اخصم قيمة الكوبونات والـ Markdown.</li><li>حدد جزء الكاش وجزء النقاط كل واحد لوحده.</li><li>خصم 30 ريال لكل راكب في كل الحالات.</li><li>الحجز المستخدم جزئيًا: دولي 30% من قيمة التذكرة، وداخلي بالسعودية فقط 50%، مع خصم 30 ريال.</li><li>GDS: احسب سعر الجزء المستخدم والمتبقي القابل للاسترجاع من قيمة التذكرة.</li></ul>',
-  b_en:'<h4>6 hours or more</h4><ul><li>Process the refund yourself.</li><li>Deduct SAR 30 per passenger.</li><li>Do not cancel the booking directly from the airline portal.</li><li>Log a Documentation Case as <b>Action Done</b> and select Yes to activate the Commercial Child Case.</li></ul><h4>4 to under 6 hours</h4><ul><li>Raise a Request Action to Commercial.</li><li>Do not transfer to FCR, refund yourself, or promise an outcome.</li></ul><h4>Under 4 hours</h4><p>Apply normal pricing rules.</p><h4>Refund calculation reminder</h4><ul><li>Deduct coupon and Markdown values.</li><li>Separate cash and points portions.</li><li>Deduct SAR 30 per passenger in all cases.</li><li>Partially used booking: 30% for international and 50% for domestic Saudi flights, with the SAR 30 deduction.</li><li>GDS: calculate the used portion and the remaining refundable amount from the ticket value.</li></ul>'},
+  b_en:'<h4>6 hours or more</h4><ul><li>Process the refund yourself.</li><li>Deduct SAR 30 per passenger.</li><li>Do not cancel the booking directly from the airline portal.</li><li>Log a Documentation Case as <b>Action Done</b> and select Yes to activate the Commercial Child Case.</li></ul><h4>4 to under 6 hours</h4><ul><li>Raise an Request Action to Commercial.</li><li>Do not transfer to FCR, refund yourself, or promise an outcome.</li></ul><h4>Under 4 hours</h4><p>Apply normal pricing rules.</p><h4>Refund calculation reminder</h4><ul><li>Deduct coupon and Markdown values.</li><li>Separate cash and points portions.</li><li>Deduct SAR 30 per passenger in all cases.</li><li>Partially used booking: 30% for international and 50% for domestic Saudi flights, with the SAR 30 deduction.</li><li>GDS: calculate the used portion and the remaining refundable amount from the ticket value.</li></ul>'},
  {cat:'exceptions',badge_ar:'استثناء',badge_en:'EXCEPTION',date:'سارية الآن',icon:'⚠️',
   t_ar:'استثناءات Schedule Change — Air India / Kuwait Airways',t_en:'Schedule Change Exceptions — Air India / Kuwait Airways',
   s_ar:'الشركتان المستثنيتان من عملية Schedule Change المعتادة هما Air India وKuwait Airways.',
@@ -461,6 +465,21 @@ const MODULES = [
     {title:'Cancel & Rebook',body:`<p><b>Eligibility:</b> الحجز الأصلي يجب أن يكون Refundable، وينطبق على Sabre وAmadeus فقط.</p><h4>Step 1</h4><p>احسب قيمة الاسترداد الصحيحة، ولا تنفذ Refund.</p><h4>Step 2</h4><p>أنشئ الرحلة المطلوبة مع الحفاظ على Baggage allowance وFare rules.</p><code class="cmd">FQS1</code><code class="cmd">RD(FB L. No.)*16</code><h4>Step 3</h4><p><b>Amount to Collect = New Booking Price − Original Booking Refund Amount + HF + Coupon (if any) + Markdown (if any)</b></p><h4>Step 4</h4><ol><li>Charge customer.</li><li>Issue new ticket.</li><li>Finalize new booking.</li><li>Send confirmed booking.</li><li>Cancel original booking.</li></ol><div class="guide-alert">⚠️ لا تنفذ Refund Request أو Instant Refund لأن Refund الأصلي تم احتسابه ضمن قيمة الحجز الجديد.</div>`},
     {title:'Partially Used — PK Fare & Atlas',body:`<h4>Step 1 — Check Eligibility</h4><ol><li>تأكد أن الحجز الأصلي قابل للتغيير.</li><li>احصل على Applicable Penalty من Backoffice.</li><li>حدد Remaining Unit Price حسب نوع الرحلة.</li></ol><table class="quick-table"><tr><th>Flight Type</th><th>Remaining Unit Price</th></tr><tr><td>Domestic</td><td>50% of original booking Unit Price</td></tr><tr><td>International</td><td>30% of original booking Unit Price</td></tr></table><h4>Step 2 — New Booking</h4><p>أنشئ الحجز عبر Sabre أولًا، أو Amadeus عند عدم توفر الخيار، مع الحفاظ على Baggage allowance وFare rules.</p><code class="cmd">FQS1</code><code class="cmd">RD(FB L. No.)*16</code><h4>Step 3 — Calculate</h4><p><b>Amount to Collect = New Flight Price − Remaining Unit Price + Penalty + HF + Coupon (if any) + Markdown (if any) + collectible taxes</b></p><ul><li>Domestic: 50% من Original Unit Price.</li><li>International: 30% من Original Unit Price.</li></ul><h4>Step 4–5</h4><ul><li>Charge applicable amount.</li><li>Issue ticket.</li><li>Finalize new PNR.</li><li>Confirm successful issuance.</li><li>بعد تأكيد الحجز الجديد، ارفع cancellation request للحجز الأصلي إلى FFT.</li></ul>`},
     {title:'Quick Reference',body:`<table class="quick-table"><tr><th>Scenario</th><th>Main Eligibility</th><th>Original Value Used</th><th>Original Final Action</th></tr><tr><td>Date Change – PK/Atlas</td><td>Changeable</td><td>Original Unit Price</td><td>Raise cancellation request to FFT</td></tr><tr><td>Airline Change</td><td>Refundable</td><td>Calculated refund amount</td><td>Cancel; no refund request/Instant Refund</td></tr><tr><td>Cancel & Rebook</td><td>Refundable; no Credit Shell</td><td>Calculated refund amount</td><td>Cancel; no refund request/Instant Refund</td></tr><tr><td>Partially Used – PK/Atlas</td><td>Changeable</td><td>50% Domestic / 30% International Unit Price</td><td>Raise cancellation request to FFT</td></tr></table><div class="guide-alert">🔑 دائمًا تأكد من eligibility للحجز الأصلي، استخدم Sabre أولًا، حافظ على baggage/fare rules، واحسب المبلغ قبل التحصيل.</div>`}
+  ]},
+  {id:'ops-updates',icon:'📢',tag:'OPERATIONS',title:'ملخص تحديثات مركز الاتصال',desc:'التحديثات التشغيلية الأخيرة مجمعة حسب الموضوع: WhatsApp self-service، Schedule Change، Commercial، FCR، Atlas/Fare PK، الحالات الخاصة، والاستثناءات.',source:'ملخص مبسط لتحديثات مركز الاتصال-1.pdf — Zafer’s Edit',sections:[
+    {title:'⚠️ قاعدة البداية — قبل أي تحويل أو طلب',body:`<p>قبل اتخاذ أي إجراء، افتح مقال قاعدة المعرفة <b>“Quick Reference FCR Flight”</b> لتحديد الحالة المناسبة حسب شركة الطيران ومصدر الحجز ونوع الطلب.</p><div class="guide-alert">Reference KB → تحديد الحالة → تأكيد الإجراء الصحيح → تطبيق العملية</div>`},
+    {title:'إلغاء الحجوزات عبر WhatsApp',body:`<p>لعميل بدأ المحادثة بنفسه من <b>Bot WB Live</b> وطلب إلغاء حجز:</p><ul><li>وجّه العميل ليُلغي بنفسه من التطبيق عبر Booking Manage إذا كان Smart Booking Dashboard يعمل.</li><li>لا تأخذ الإجراء من عندك.</li><li>اختر نتيجة الحالة: <b>App to Directed</b>.</li><li>إذا كان الـ dashboard معطلًا، أأكمل الإلغاء بنفسك بشكل طبيعي.</li></ul><div class="guide-alert">Bot WB Live → App to Directed | 1V Transfer LiveChat Almatar → نفّذ الإجراء بنفسك.</div>`},
+    {title:'الحقائب / اختيار المقعد / بطاقة الصعود',body:`<p>إذا كان الطلب من WhatsApp مباشرة (Bot WB Live) لإضافة حقيبة أو اختيار مقعد أو إصدار بطاقة صعود: وجّه العميل للتطبيق واختر <b>App to Directed</b>، ولا تأخذ الإجراء من عندك.</p><p>إذا جاء الطلب من <b>1V Transfer LiveChat Almatar</b>، نفّذ الطلب بنفسك بشكل طبيعي.</p>`},
+    {title:'Schedule Change',body:`<h4>GDS — One-way</h4><p>إذا كان فرق الموعد 30 دقيقة أو أقل: نفّذ EWR بنفسك، لا ترفع Case، وسجّل الحالة Documentation بحالة <b>Done Action</b>.</p><p>إذا لا يمكن التنفيذ أو الفرق أكبر من 30 دقيقة: لا تحوّل إلى Flights Transfer FCR؛ ارفع <b>Request Action</b> للفريق التجاري.</p><h4>LCC — Flynas / Flyadeal</h4><p>إذا كان Change متاحًا على البورتال: نفّذه بنفسك. إذا لم يوجد Change والعميل يريد التعديل: ارفع Request Action للفريق التجاري ولا تحول الشات لـ FCR، مع كتابة التواريخ الجديدة وكل التفاصيل المطلوبة.</p>`},
+    {title:'Round Trip & Full Cancellation Eligibility',body:`<ul><li>إذا تأثرت رحلة واحدة بتغيير موعد وكان الاتجاهان على نفس PNR، قد يكون الإلغاء الكامل مؤهلًا؛ تأكد من KB قبل الإلغاء/الاسترداد.</li><li>إذا كان لكل اتجاه PNR مختلف: ارفع Request Action للفريق التجاري، ولا تحول لـ Flights Transfer FCR ولا تنفذ Refund بنفسك ولا تعد العميل بنتيجة.</li><li>إذا كان PNR منفصل لكل اتجاه والعميل يريد تعديل الاثنين بسبب عدم الموافقة على Schedule Change في إحدى الرحلتين: ارفع Commercial Case ولا تأخذ Action على أي حجز.</li><li>إذا كان نفس PNR ونفس GDS وتأثرت Leg واحدة والعميل يريد تعديل الذهاب والعودة: ارفع Commercial Case.</li><li>إذا كانت قواعد GDS العادية تنطبق وفرق الموعد 30 دقيقة أو أقل: نفّذ التعديل طبيعيًا بدون Case.</li></ul>`},
+    {title:'قاعدة 48 ساعة للطلبات التجارية',body:`<p>الأصل أن أي طلب للفريق التجاري يكون السفر بعده بأكثر من 48 ساعة.</p><p><b>استثناءات ترفع في أي وقت:</b> إلغاء بسبب Schedule Change من شركة الطيران، Void لـ Fare PK، وVoid لـ Atlas.</p>`},
+    {title:'Flynas: إلغاء Schedule Change لتاريخ سابق',body:`<p>إذا لا يوجد Case مفتوح والحجز لا يفتح على موقع Flynas أو الموقع يقول “الحجز ملغي”:</p><ol><li>لا تنفذ Refund فورًا.</li><li>اسأل TL أو SME: هل وصلنا إشعار بإلغاء الرحلة؟</li><li>إذا يوجد إشعار إلغاء: أكمل Refund حسب إجراءات Schedule Change المعتادة.</li><li>إذا لا يوجد إشعار: حوّل العميل لشركة الطيران مباشرة.</li></ol>`},
+    {title:'FCR Transfer Flights مقابل Request Action',body:`<ul><li>القاعدة القديمة بتحويل أي Request Action إلى Flights Transfer FCR ملغاة.</li><li>تحتاج إلى إجراء من Commercial؟ ارفع Request Action مباشرة وحدد الحالة “Request Action” وأرفق البيانات والمستندات المطلوبة.</li><li>تحتاج إلى Flights Transfer FCR تحديدًا؟ فقط حوّل الشات لطابورهم.</li><li>إذا كان التحويل مطلوبًا فعليًا، وضّح للعميل أن الشات سيتحول.</li><li>وقت الانتظار التقريبي: <b>15 دقيقة</b>.</li></ul>`},
+    {title:'تحديث البريد أو الهاتف — Atlas / Fare PK',body:`<p>إذا كان العميل لديه Fare PK أو Atlas ويريد تحديث البريد أو رقم الهاتف: <b>لا ترفع Request Action ولا تحول لـ Flights Transfer FCR.</b> وجّه العميل مباشرة إلى شركة الطيران لإتمام التحديث.</p>`},
+    {title:'الاسم / الوفاة / الحالات الطبية',body:`<h4>طلب جديد</h4><ul><li>تصحيح اسم 3 حروف أو أقل: Request Action للفريق التجاري، بدون FCR.</li><li>حالات الوفاة والحالات الطبية: Request Action للفريق التجاري، بدون FCR.</li><li>تصحيح اسم أكثر من 3 حروف: غير مسموح؛ أبلغ العميل، لا ترفع Request Action، وسجّل Documentation Case كـ <b>Resolved</b>.</li></ul><h4>متابعة Case مفتوح</h4><p>لا تحول لـ FCR. أضف Feed Case على نفس الحالة بتفاصيل المتابعة، ولا تفتح Request Action جديدة لنفس الموضوع إذا كانت هناك حالة مفتوحة.</p>`},
+    {title:'إلغاء Schedule Change لحجوزات Portal',body:`<ul><li><b>6 ساعات أو أكثر:</b> نفّذ Refund بنفسك مع خصم 30 SAR لكل راكب. لا تلغِ الحجز من بوابة الطيران مباشرة. سجّل Documentation Case بحالة <b>Action Done</b> واختر “Yes” لتفعيل Commercial Child Case.</li><li><b>من 4 إلى أقل من 6 ساعات:</b> ارفع Request Action للفريق التجاري، بدون FCR وبدون Refund من عندك، ولا تعد العميل بنتيجة.</li><li><b>أقل من 4 ساعات:</b> طبق قواعد التسعير العادية.</li></ul><p><b>عند حساب Refund:</b> اخصم قيمة الكوبونات والـ Markdown، وافصل الكاش عن النقاط، وخصم 30 SAR لكل راكب. الحجز المستخدم جزئيًا: دولي 30% من قيمة التذكرة، وداخلي بالسعودية 50%، مع خصم 30 SAR. حجوزات GDS: احسب الجزء المستخدم والمتبقي القابل للاسترداد.</p>`},
+    {title:'استثناءات Schedule Change',body:`<p>الشركتان المستثنيتان فقط من عملية Schedule Change المعتادة هما <b>Air India</b> و<b>Kuwait Airways</b>. لأي حالة بهاتين الشركتين: حوّل الشات مباشرة إلى <b>Flights Transfer FCR</b>.</p>`},
+    {title:'🔑 Final Reminder',body:`<div class="guide-alert">عند وجود تعارض مع رسائل قديمة، اتبع التعليمة الأحدث. عند أي استفسار، تواصل مع TL أو فريق التدريب.</div>`}
   ]},
   {id:'offline-sync',icon:'🔄',tag:'BACKOFFICE / SABRE',title:'Offline Reissue Sync',desc:'مزامنة حجوزات Sabre على Backoffice بعد تنفيذ Reissue أو Rebook & Void خارج النظام.',source:'Offline Reissue Sync Guide Zafer’s Edit.pdf',sections:[
     {title:'Overview: متى تستخدمها؟',body:`<p>الخاصية مخصصة حاليًا لحجوزات <b>Sabre فقط</b>. يجب استخدامها بعد تنفيذ Reissue أو Rebook & Void خارج Backoffice، حتى تنعكس أحدث بيانات PNR والخدمة والدفع ورسوم المناولة وتفاصيل التعديل على الحجز.</p><div class="guide-alert">Sabre وحده غير كافٍ — بعد العملية يجب مزامنة التعديل على Backoffice.</div>`},
@@ -497,11 +516,11 @@ ar:{brand:'ذا ليجندز — المطار',nav_updates:'التحديثات',
 hero_badge:'مركز المعرفة الرسمي للفريق — محدث دائمًا',hero_t1:'كل حاجة الفريق محتاجها…',hero_t2:'في مكان واحد',
 hero_sub:'التحديثات، العروض، سير العمل، والسياسات — كلها متجمعة هنا بشكل تفاعلي وواضح. مفيش حد في الفريق هيضيع تاني.',
 hero_b1:'📋 شوف المقالات',hero_b2:'📚 قاعدة المعرفة',
-st1:'مقالات تشغيلية',st2:'أدلة عملية',st3:'موضوعًا قابلًا للبحث',
+st1:'مقال تشغيلي',st2:'أدلة عملية',st3:'موضوعًا قابلًا للبحث',
 up_tag:'📢 LIVE UPDATES',up_title:'آخر التحديثات',up_sub:'كل مقال مبني على التحديثات والمواد اللي اتضافت للفريق — اضغط على أي مقال لفتح التفاصيل كاملة.',
 f_all:'الكل',f_new:'جديد',f_offer:'عروض',f_workflow:'سير عمل',f_policy:'سياسات',article_ph:'🔎 ابحث عن مقال أو كلمة مثل WhatsApp / FCR / Flynas / Portal...',article_hint:'اضغط على أي مقال لفتح التفاصيل كاملة',search_article_type:'مقال',search_guide_type:'دليل',search_hint:'نتائج البحث المباشرة — اضغط على أي نتيجة لفتح الموضوع',search_no_results:'لا توجد نتائج مطابقة — جرّب كلمة أخرى',
 kb_tag:'📚 KNOWLEDGE BASE',kb_title:'قاعدة المعرفة',kb_sub:'ابحث في الأدلة والمقالات — كل موضوع مقسّم ومنظّم.',kb_ph:'🔍 ابحث في قاعدة المعرفة...',kb_empty:'😕 لا توجد نتائج مطابقة — جرّب كلمة أخرى',modules_title:'الأدلة العملية — كل موضوع لوحده',modules_sub:'كل ملف محوّل إلى وحدة مستقلة: افتح الموضوع، اختار الجزء اللي تحتاجه، واقرأه بدون ما تدور في ملف طويل.',
-footer:'فريق واحد. قصة واحدة. أسطورة واحدة. 👑'},
+footer:'فريق واحد. قصة واحدة. أسطورة واحدة. 👑',toast:'تم التبديل للغة الإنجليزية 🇬🇧'},
 en:{brand:'THE LEGENDS — ALMATAR',nav_updates:'Updates',nav_offers:'',nav_workflow:'',nav_kb:'',nav_modules:'Knowledge Base',
 hero_badge:'Official team knowledge hub — always up to date',hero_t1:'Everything your team needs…',hero_t2:'in one place',
 hero_sub:'Updates, offers, workflow and policies — all gathered here in an interactive, crystal-clear hub. No one on the team gets lost again.',
@@ -510,7 +529,7 @@ st1:'Operational articles',st2:'Practical guides',st3:'Searchable topics',
 up_tag:'📢 LIVE UPDATES',up_title:'Latest Updates',up_sub:'Articles based on the latest team updates and materials — click any article for the full details.',
 f_all:'All',f_new:'New',f_offer:'Offers',f_workflow:'Workflow',f_policy:'Policies',article_ph:'🔎 Search an article or keyword such as WhatsApp / FCR / Flynas / Portal...',article_hint:'Click any article to open the full details',search_article_type:'Article',search_guide_type:'Guide',search_hint:'Instant results — click any result to open the topic',search_no_results:'No matching results — try another keyword',
 kb_tag:'📚 KNOWLEDGE BASE',kb_title:'Knowledge Base',kb_sub:'Search the guides and articles — every topic is organized.',kb_ph:'🔍 Search the knowledge base...',kb_empty:'😕 No matching results — try another word',modules_title:'Practical Guides — One Topic at a Time',modules_sub:'Each file is a standalone module: open the topic, choose the part you need, and read it without digging through a long file.',
-footer:'One team. One story. One legend. 👑'}};
+footer:'One team. One story. One legend. 👑',toast:'Switched to Arabic 🇪🇬'}};
 
 let lang = 'ar';
 const t = k => I18N[lang][k];
@@ -518,59 +537,6 @@ const t = k => I18N[lang][k];
 /* ==================== RENDER ==================== */
 const $ = s => document.querySelector(s);
 const esc = s => s.replace(/'/g,"\'");
-function moduleTitle(m){
-  if(lang==='ar') return m.title;
-  const map={
-    'infant-sabre':'Adding an Infant — Sabre Bookings',
-    'fcr-new-booking':'FCR — New Booking — Sabre',
-    'offline-sync':'Offline Reissue Sync — Backoffice',
-    'anb-card':'Almatar Credit Card — ANB'
-  };
-  return map[m.id]||m.title;
-}
-function moduleDesc(m){
-  if(lang==='ar') return m.desc;
-  const map={
-    'infant-sabre':'Add an infant to an existing Sabre booking, price it, add documents, issue the ticket, and finalize the booking.',
-    'fcr-new-booking':'Guide for FCR cases requiring a new booking: Date Change, Airline Change, Cancel & Rebook, Partially Used, and Adding PAX.',
-    'offline-sync':'How to synchronize an offline reissue from Backoffice and complete the required fields.',
-    'anb-card':'Key information and handling guidance for the Almatar ANB credit card.'
-  };
-  return map[m.id]||m.desc;
-}
-function moduleSectionTitle(x){
-  if(lang==='ar') return x.title;
-  const map={
-    'قبل ما تبدأ — Eligibility & Important Rules':'Before You Start — Eligibility & Important Rules',
-    'Step 1 — Add the Infant Name':'Step 1 — Add the Infant Name',
-    'Step 2 — Price the Infant':'Step 2 — Price the Infant',
-    'Step 3 — Store the Infant Pricing':'Step 3 — Store the Infant Pricing',
-    'Step 4 — Add the Infant Documents':'Step 4 — Add the Infant Documents',
-    'Step 5 — Save the PNR':'Step 5 — Save the PNR',
-    'Step 6 — Issue the Infant Ticket':'Step 6 — Issue the Infant Ticket',
-    'Step 7 — Finalize the Booking':'Step 7 — Finalize the Booking',
-    'General Information — القاعدة الأساسية':'General Information — Basic Rule',
-    'Date Change — PK Fare & Atlas':'Date Change — PK Fare & Atlas',
-    'Airline Change':'Airline Change',
-    'Cancel & Rebook':'Cancel & Rebook',
-    'Partially Used — PK Fare & Atlas':'Partially Used — PK Fare & Atlas',
-    'Quick Reference':'Quick Reference',
-    'Overview: متى تستخدمها؟':'Overview — When to Use It',
-    'فتح الخاصية واستكمال البيانات':'Open the Feature & Complete the Details',
-    'شرح الحقول':'Field Explanation',
-    'Directionality Leg':'Directionality Leg',
-    'Review → Sync → Verify':'Review → Sync → Verify',
-    'إصدار البطاقة':'Card Issuance',
-    'Eligibility & Application Channels':'Eligibility & Application Channels',
-    'كسب النقاط':'Earning Points',
-    'Cap / Exceptions':'Cap / Exceptions',
-    'Travel Benefits':'Travel Benefits',
-    'Lifestyle Benefits':'Lifestyle Benefits',
-    'Safeer Tier':'Safeer Tier',
-    'FAQs التي تهم الموظف':'Employee FAQs'
-  };
-  return map[x.title]||x.title;
-}
 
 
 function openImageLightbox(src){const box=$('#imageLightbox'),img=$('#lightboxImg');if(!box||!img)return;img.src=src;box.classList.add('open');document.body.style.overflow='hidden';}
@@ -580,20 +546,20 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeImageLightbox(
 function renderModules(q=''){
   const grid=$('#modulesGrid'); if(!grid) return;
   const Q=q.trim().toLowerCase();
-  const items=MODULES.filter(m=>(m.title+' '+m.desc+' '+m.tag+' '+m.source+' '+moduleTitle(m)+' '+moduleDesc(m)).toLowerCase().includes(Q));
+  const items=MODULES.filter(m=>(m.title+' '+m.desc+' '+m.tag+' '+m.source).toLowerCase().includes(Q));
   grid.innerHTML=items.map((m,i)=>`<article class="module-card" onclick="openGuide('${m.id}')" style="animation:fadeUp .5s ${i*.08}s both">
     <div class="module-top"><span class="module-icon">${m.icon}</span><span class="module-badge">${m.tag}</span></div>
-    <h3>${moduleTitle(m)}</h3><p>${moduleDesc(m)}</p>
-    <div class="module-action"><span>${m.sections.length} ${lang==='ar'?'أجزاء مستقلة':'sections'}</span><span>${lang==='ar'?'افتح الدليل ←':'Open guide →'}</span></div>
-    <div class="module-source">${lang==='ar'?'المصدر:':'Source:'} ${m.source}</div>
+    <h3>${m.title}</h3><p>${m.desc}</p>
+    <div class="module-action"><span>${m.sections.length} أجزاء مستقلة</span><span>افتح الدليل ←</span></div>
+    <div class="module-source">المصدر: ${m.source}</div>
   </article>`).join('');
   $('#moduleCount').textContent = lang==='ar' ? `${items.length} من ${MODULES.length} أدلة ظاهرة` : `${items.length} of ${MODULES.length} guides shown`;
 }
 function openGuide(id){
   const m=MODULES.find(x=>x.id===id); if(!m) return;
-  $('#mTitle').textContent=m.icon+' '+moduleTitle(m);
+  $('#mTitle').textContent=m.icon+' '+m.title;
   $('#mDate').textContent='📚 '+m.tag+' • '+m.source;
-  $('#mBody').innerHTML=`<div class="guide-hero"><div class="guide-kicker">${m.tag}</div><h2>${moduleTitle(m)}</h2><p>${moduleDesc(m)}</p></div><div class="guide-steps">${m.sections.map((x,i)=>`<details class="guide-step" ${i===0?'open':''}><summary><span>${i+1}</span>${moduleSectionTitle(x)}</summary><div class="step-body">${x.body}${sectionVisual(m.id,i)}</div></details>`).join('')}</div>`;
+  $('#mBody').innerHTML=`<div class="guide-hero"><div class="guide-kicker">${m.tag}</div><h2>${m.title}</h2><p>${m.desc}</p></div><div class="guide-steps">${m.sections.map((x,i)=>`<details class="guide-step" ${i===0?'open':''}><summary><span>${i+1}</span>${x.title}</summary><div class="step-body">${x.body}${sectionVisual(m.id,i)}</div></details>`).join('')}</div>`;
   $('#modalBg').classList.add('open'); document.body.style.overflow='hidden';
 }
 
@@ -619,22 +585,7 @@ function renderSearchResults(q='') {
   const box = $('#searchResults');
   if (!box) return;
   const Q = q.trim().toLowerCase();
-  const updatesGrid = $('#updatesGrid');
-  const modulesGrid = $('#modulesGrid');
-  const articleCount = $('#articleCount');
-  const moduleCount = $('#moduleCount');
-  if (!Q) {
-    box.classList.remove('show'); box.innerHTML='';
-    if(updatesGrid) updatesGrid.style.display='grid';
-    if(modulesGrid) modulesGrid.style.display='grid';
-    if(articleCount) articleCount.style.display='';
-    if(moduleCount) moduleCount.style.display='';
-    return;
-  }
-  if(updatesGrid) updatesGrid.style.display='none';
-  if(modulesGrid) modulesGrid.style.display='none';
-  if(articleCount) articleCount.style.display='none';
-  if(moduleCount) moduleCount.style.display='none';
+  if (!Q) { box.classList.remove('show'); box.innerHTML=''; return; }
 
   const updates = DATA.updates.map((u, idx) => ({
     kind:'article', idx, icon:u.icon,
@@ -646,7 +597,7 @@ function renderSearchResults(q='') {
 
   const guides = MODULES.map(m => ({
     kind:'guide', id:m.id, icon:m.icon,
-    title:moduleTitle(m), desc:moduleDesc(m), type:t('search_guide_type'),
+    title:m.title, desc:m.desc, type:t('search_guide_type'),
     hay:[m.title,m.desc,m.tag,m.source,m.sections.map(x=>x.title+' '+x.body).join(' ')].join(' ')
   })).filter(x=>x.hay.toLowerCase().includes(Q));
 
@@ -699,11 +650,19 @@ $('#modalClose').onclick = closeModal;
 $('#modalBg').onclick = e => { if(e.target.id==='modalBg') closeModal(); };
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
+let toastTimer;
+function toast(msg){
+  const el = $('#toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.classList.remove('show'),2200);
+}
+
 /* ==================== EVENTS ==================== */
 $('#langBtn').onclick = () => {
   const toEn = lang==='ar';
   lang = toEn?'en':'ar';
+  $('#toast').dataset.i18n='toast';
   applyLang();
+  toast(toEn ? I18N.en.toast : I18N.ar.toast);
 };
 $('#burger').onclick = ()=> $('#navLinks').classList.toggle('open');
 document.querySelectorAll('.nav-links a').forEach(a=>a.onclick=()=>$('#navLinks').classList.remove('open'));
